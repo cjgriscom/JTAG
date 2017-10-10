@@ -27,8 +27,12 @@ private:
 	uint8_t m_wait_end_state;
 	uint32_t m_wait_time_usecs;
 	bool m_xcomplete;
-
+    
+#if defined (__arm__) && defined (__SAM3X8E__)
+	static const uint32_t S_MAX_CHAIN_SIZE_BYTES = 1024;
+#else
 	static const uint32_t S_MAX_CHAIN_SIZE_BYTES = 129;
+#endif
 	static const uint32_t S_MAX_CHAIN_SIZE_BITS = S_MAX_CHAIN_SIZE_BYTES * 8;
 	uint8_t m_tdi[S_MAX_CHAIN_SIZE_BYTES];
 	uint8_t m_tdo[S_MAX_CHAIN_SIZE_BYTES];
