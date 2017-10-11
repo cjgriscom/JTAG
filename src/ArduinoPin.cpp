@@ -8,9 +8,11 @@ ArduinoPin::ArduinoPin(uint8_t pin, uint8_t mode)
 , m_pin(pin)
 , m_mode(mode)
 {
-	setBit(digitalPinToBitMask(pin));
-	setPort(digitalPinToPort(pin));
-	pinMode(ArduinoPin::pin(), ArduinoPin::mode());
+    if (pin!=255) {
+        setBit(digitalPinToBitMask(pin));
+        setPort(digitalPinToPort(pin));
+        pinMode(ArduinoPin::pin(), ArduinoPin::mode());
+    }
 }
 
 ArduinoInputPin::ArduinoInputPin(uint8_t pin)

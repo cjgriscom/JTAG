@@ -13,6 +13,7 @@ JTAGPortArduino::JTAGPortArduino(
 , m_tck(tck)
 , m_vref(vref)
 , m_vref_is_analog(vref_is_analog)
+, m_vref_disabled(vref == 255)
 {
 	JTAGPortArduino::tck().set();
 }

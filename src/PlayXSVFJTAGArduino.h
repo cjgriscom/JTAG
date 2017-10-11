@@ -27,7 +27,7 @@ public:
 		uint8_t tdi,
 		uint8_t tdo,
 		uint8_t tck,
-		uint8_t vref,
+		uint8_t vref = 255,
 		bool vref_is_analog = false);
 	~PlayXSVFJTAGArduino() {}
 	SerialComm &serialComm() { return m_serial_comm; }

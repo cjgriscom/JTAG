@@ -19,6 +19,7 @@ private:
 	ArduinoOutputPin m_tck;
 	ArduinoInputPin m_vref;
 	bool m_vref_is_analog;
+	bool m_vref_disabled;
 
 	const ArduinoOutputPin &tms() const { return m_tms; }
 	const ArduinoOutputPin &tdi() const { return m_tdi; }
@@ -26,6 +27,7 @@ private:
 	const ArduinoOutputPin &tck() const { return m_tck; }
 	const ArduinoInputPin &vref() const { return m_vref; }
 	bool vrefIsAnalog() const { return m_vref_is_analog; }
+	bool vrefDisabled() const { return m_vref_disabled; }
 
 public:
 	JTAGPortArduino(
@@ -61,7 +63,8 @@ public:
 	void clr_tdi() { tdi().clr(); }
 	bool read_vref() const
 	{
-		if (vrefIsAnalog()) {
+		if (vrefDisabled()) return 1; // disabled
+        if (vrefIsAnalog()) {
 			// Use 1.0 V as threshold
 			return analogRead(vref().pin()) * 5 / 1023 > 1;
 		} else {
